@@ -1,0 +1,11 @@
+name: ${project.name}
+main: ${project.groupId}.sanerbaltop.SanerBaltopPlugin
+version: ${project.version}
+author: A248
+description: A saner baltop for SaneEconomy.
+depend: [Vault, SaneEconomy]
+
+commands:
+  baltop:
+    description: Baltop command
+    usage: /sanerbaltop [page]
