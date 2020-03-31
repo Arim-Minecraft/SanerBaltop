@@ -6,6 +6,6 @@ description: A saner baltop for SaneEconomy.
 depend: [Vault, SaneEconomy]
 
 commands:
-  baltop:
+  sanerbaltop:
     description: Baltop command
     usage: /sanerbaltop [page]
