@@ -18,7 +18,7 @@
  */
 package space.arim.sanerbaltop;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -27,8 +27,8 @@ import org.bukkit.command.CommandSender;
 
 import space.arim.universal.registry.UniversalRegistry;
 
-import space.arim.api.uuid.PlayerNotFoundException;
-import space.arim.api.uuid.UUIDResolver;
+import space.arim.api.concurrent.AsyncExecution;
+import space.arim.api.uuid.UUIDResolution;
 
 public class BaltopCommand implements CommandExecutor {
 
@@ -60,22 +60,21 @@ public class BaltopCommand implements CommandExecutor {
 			sendMessage(sender, "&6Arim>> &cMaximum page is &e" + totalpage + "&c.");
 			return true;
 		}
+		ArrayList<BaltopEntry> entries = new ArrayList<BaltopEntry>();
+		plugin.topBalances.forEach((entry) -> entries.add(entry.clone()));
 		int offset = (page - 1)*perpage;
-		for (int n = 0; n < plugin.topBalances.size(); n++) {
-			if (n >= offset && n < offset + perpage) {
-				BaltopEntry entry = plugin.topBalances.get(n);
-				sendMessage(sender, "&3" + n + "&7. " + uuidToName(entry.getKey()) + " &a$" + entry.getValue());
+		UniversalRegistry.get().load(AsyncExecution.class).execute(() -> {
+			for (int n = 0; n < entries.size(); n++) {
+				if (n >= offset && n < offset + perpage) {
+					BaltopEntry entry = entries.get(n);
+					sendMessage(sender,
+							"&3" + n + "&7. "
+									+ UniversalRegistry.get().load(UUIDResolution.class).resolve(entry.getKey()).join()
+									+ " &a$" + entry.getValue());
+				}
 			}
-		}
+		});
 		return true;
-	}
-	
-	private String uuidToName(UUID uuid) {
-		try {
-			return UniversalRegistry.get().getRegistration(UUIDResolver.class).resolveUUID(uuid, false);
-		} catch (PlayerNotFoundException ex) {
-			return "unknown";
-		}
 	}
 	
 	private void sendMessage(CommandSender sender, String message) {

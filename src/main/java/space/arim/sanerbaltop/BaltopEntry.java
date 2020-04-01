@@ -21,7 +21,7 @@ package space.arim.sanerbaltop;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class BaltopEntry implements Comparable<BaltopEntry> {
+public class BaltopEntry implements Comparable<BaltopEntry>, Cloneable {
 
 	private final UUID uuid;
 	private volatile BigDecimal balance;
@@ -46,6 +46,11 @@ public class BaltopEntry implements Comparable<BaltopEntry> {
 	@Override
 	public int compareTo(BaltopEntry o) {
 		return (balance.subtract(o.balance)).intValue();
+	}
+	
+	@Override
+	public BaltopEntry clone() {
+		return new BaltopEntry(uuid, balance);
 	}
 
 }
