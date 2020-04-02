@@ -50,7 +50,11 @@ public class BaltopEntry implements Comparable<BaltopEntry>, Cloneable {
 	
 	@Override
 	public BaltopEntry clone() {
-		return new BaltopEntry(uuid, balance);
+		try {
+			return (BaltopEntry) super.clone();
+		} catch (CloneNotSupportedException ex) {
+			throw new Error(ex);
+		}
 	}
 
 }
