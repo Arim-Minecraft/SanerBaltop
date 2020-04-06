@@ -21,7 +21,7 @@ package space.arim.sanerbaltop;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class BaltopEntry implements Comparable<BaltopEntry>, Cloneable {
+class BaltopEntry implements Comparable<BaltopEntry>, Cloneable {
 
 	private final UUID uuid;
 	private volatile BigDecimal balance;

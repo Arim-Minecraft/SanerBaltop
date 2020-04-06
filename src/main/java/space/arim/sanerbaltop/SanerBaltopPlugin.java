@@ -20,6 +20,7 @@ package space.arim.sanerbaltop;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,7 +63,7 @@ public class SanerBaltopPlugin extends JavaPlugin {
 
 	private void addAndSort(UUID uuid, BigDecimal balance) {
 		topBalances.add(new BaltopEntry(uuid, balance));
-		topBalances.sort(null);
+		topBalances.sort(Comparator.reverseOrder());
 	}
 	
 	private void addEntry(UUID uuid, BigDecimal balance) {
@@ -85,7 +86,7 @@ public class SanerBaltopPlugin extends JavaPlugin {
 				BaltopEntry entry = topBalances.get(n);
 				if (entry.getKey().equals(uuid)) {
 					entry.setValue(result);
-					topBalances.sort(null);
+					topBalances.sort(Comparator.reverseOrder());
 					return;
 				}
 			}
