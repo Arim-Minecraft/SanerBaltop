@@ -27,13 +27,10 @@ import java.util.UUID;
 import org.appledash.saneeconomy.ISaneEconomy;
 import org.appledash.saneeconomy.economy.economable.Economable;
 import org.appledash.saneeconomy.economy.economable.EconomablePlayer;
-import org.appledash.saneeconomy.vault.EconomySaneEconomy;
 
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import net.milkbowl.vault.economy.Economy;
 
 public class SanerBaltopPlugin extends JavaPlugin {
 
@@ -43,13 +40,12 @@ public class SanerBaltopPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-		Economy econ = (rsp != null) ? rsp.getProvider() : null;
-		if (!(econ instanceof EconomySaneEconomy)) {
+		Plugin sanePlugin = getServer().getPluginManager().getPlugin("SaneEconomy");
+		if (sanePlugin == null || !(sanePlugin instanceof ISaneEconomy)) {
 			getLogger().warning("SaneEconomy not installed");
 			return;
 		}
-		this.economy = (ISaneEconomy) getServer().getPluginManager().getPlugin("SaneEconomy");
+		this.economy = (ISaneEconomy) sanePlugin;
 
 		config = new Config(getDataFolder());
 		config.reload();

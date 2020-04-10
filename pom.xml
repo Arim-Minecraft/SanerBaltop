@@ -18,7 +18,6 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<arimapi.version>0.8.0-SNAPSHOT</arimapi.version>
 		<universal.version>0.8.1-SNAPSHOT</universal.version>
-		<vault.version>1.7</vault.version>
 		<!-- SaneEconomy dependency is system scope, so be sure to
 		change the file in /dependencies/ when changing this. -->
 		<saneeconomy.version>0.17.0-SNAPSHOT</saneeconomy.version>
@@ -121,11 +120,6 @@
 			<version>${arimapi.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.MilkBowl</groupId>
-			<artifactId>VaultAPI</artifactId>
-			<version>${vault.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.appledash</groupId>
 			<artifactId>SaneEconomyCore</artifactId>
 			<version>${saneeconomy.version}</version>
@@ -144,10 +138,6 @@
 		<repository>
 			<id>arim-repo</id>
 			<url>https://dl.cloudsmith.io/public/anand-beh/arim-repo/maven/</url>
-		</repository>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
 		</repository>
 		<repository>
 			<id>spigot-repo</id>
