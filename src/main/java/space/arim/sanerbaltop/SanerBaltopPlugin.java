@@ -52,6 +52,7 @@ public class SanerBaltopPlugin extends JavaPlugin {
 		this.economy = (ISaneEconomy) getServer().getPluginManager().getPlugin("SaneEconomy");
 
 		config = new Config(getDataFolder());
+		config.reload();
 		getServer().getPluginCommand("sanerbaltop").setExecutor(new BaltopCommand(this));
 		getServer().getPluginManager().registerEvents(new BalanceChangeListener(this), this);
 
