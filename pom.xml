@@ -5,7 +5,7 @@
 	
 	<groupId>space.arim</groupId>
 	<artifactId>sanerbaltop</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	
 	<name>SanerBaltop</name>
 	<description>The SaneEconomy baltop didn't work. So here's a workaround.</description>
