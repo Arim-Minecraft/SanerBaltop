@@ -64,14 +64,14 @@ public class BaltopCommand implements CommandExecutor {
 		plugin.topBalances.forEach((entry) -> entries.add(entry.clone()));
 		int offset = (page - 1)*perpage;
 		UniversalRegistry.get().load(AsyncExecution.class).execute(() -> {
+			int position = 0;
 			for (int n = 0; n < entries.size(); n++) {
 				if (n >= offset && n < offset + perpage) {
 					BaltopEntry entry = entries.get(n);
-					int position = n + 1;
-					sendMessage(sender,
-							"&3" + position + "&7. "
-									+ UniversalRegistry.get().load(UUIDResolution.class).resolve(entry.getKey()).join()
-									+ " &a$" + entry.getValue());
+					String name = UniversalRegistry.get().load(UUIDResolution.class).resolve(entry.getKey()).join();
+					if (name != null) {
+						sendMessage(sender,"&3" + ++position + "&7. " + name + " &a$" + entry.getValue());
+					}
 				}
 			}
 		});
